@@ -1,6 +1,7 @@
 """Development settings and globals."""
 from __future__ import absolute_import
-from os.path import join
+from os.path import join, normpath
+import os
 from .base import *
 import logging
 
@@ -10,6 +11,11 @@ logger = logging.getLogger(__name__)
 ON_OPENSHIFT = False
 if 'OPENSHIFT_REPO_DIR' in os.environ:
     ON_OPENSHIFT = True
+
+# openshift
+if ON_OPENSHIFT:
+    MEDIA_ROOT = normpath(
+        join(os.environ['OPENSHIFT_DATA_DIR'], 'media'))
 
 
 # ====== DEBUG CONFIGURATION ======

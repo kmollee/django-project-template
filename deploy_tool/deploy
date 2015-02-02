@@ -1,0 +1,44 @@
+#!/bin/bash
+# this script use in openshift python3.3 cart
+# This deploy hook gets executed after dependencies are resolved and the
+# build hook has been run but before the application has been started back
+# up again.  This script gets executed directly, so it could be python, php,
+# ruby, etc.
+
+# activate virtual env
+source "$OPENSHIFT_HOMEDIR/python/virtenv/venv/bin/activate"
+
+
+# create database folder if not exist
+if [ ! -d "$OPENSHIFT_DATA_DIR/database" ]
+then
+    mkdir "$OPENSHIFT_DATA_DIR/database"
+fi
+
+if [ ! -d "$OPENSHIFT_DATA_DIR/whoosh" ]
+then
+    mkdir "$OPENSHIFT_DATA_DIR/whoosh"
+fi
+
+# create media folder if not exist
+if [ ! -d "$OPENSHIFT_DATA_DIR/media" ]
+then
+    mkdir "$OPENSHIFT_DATA_DIR/media"
+fi
+
+
+# if static folder not exist, create one
+if [ ! -d "$OPENSHIFT_REPO_DIR/wsgi/static" ]
+then
+    mkdir "$OPENSHIFT_REPO_DIR/wsgi/static"
+fi
+
+
+# migrate to database
+python "$OPENSHIFT_REPO_DIR/wsgi/source/manage.py syncdb --noinput"
+python "$OPENSHIFT_REPO_DIR/wsgi/source/manage.py makemigrations --noinput"
+python "$OPENSHIFT_REPO_DIR/wsgi/source/manage.py migrate --noinput"
+
+# collect static file
+echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/source/manage.py collectstatic --noinput'"
+python "$OPENSHIFT_REPO_DIR/wsgi/source/manage.py collectstatic -c --noinput"
