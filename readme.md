@@ -5,6 +5,7 @@
 1. `$ cd projectname`
 1. `$ ./virtualenv.sh`
 1. `$ cd ./source`
+1. set up database
 1. `$ ./manage.py syncdb`
 1. `$ ./manage.py migrate`
 1. `$ ./manage.py runserver`

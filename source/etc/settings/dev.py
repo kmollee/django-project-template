@@ -32,9 +32,9 @@ if DATABASES_TYPE == 'MYSQL':
         DATABASES = {
             'default': {
                 'ENGINE': 'django.db.backends.mysql',
-                'NAME': 'rmd',
-                'USER': 'rmdadmin',
-                'PASSWORD': 'zR48VyuRxjvv6QZa',
+                'NAME': '',
+                'USER': '',
+                'PASSWORD': '',
             }
         }
 else:
