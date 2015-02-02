@@ -1,0 +1,4 @@
+Django
+django_debug_toolbar
+django_extensions
+PyMySQL
