@@ -5,7 +5,7 @@
 1. `$ cd projectname`
 1. `$ ./virtualenv.sh`
 1. '$ source ./env/bin/activate'
-1. `$ cd ./source`
+1. `$ cd ./wsgi/source`
 1. set up database in etc's settings folder(`dev.py`)
 1. `$ ./manage.py syncdb`
 1. `$ ./manage.py migrate`
