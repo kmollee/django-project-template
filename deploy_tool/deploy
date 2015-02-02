@@ -8,6 +8,9 @@
 # activate virtual env
 source "$OPENSHIFT_HOMEDIR/python/virtenv/venv/bin/activate"
 
+# install requirment packages
+pip install -r "$OPENSHIFT_HOMEDIR/requirements/pro.txt"
+
 
 # create database folder if not exist
 if [ ! -d "$OPENSHIFT_DATA_DIR/database" ]
